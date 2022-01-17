@@ -13,15 +13,13 @@ local Tab2 = Window:CreateTab("UI Settings")
 local Section1 = Tab1:CreateSection("First Section")
 local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
---[[
-local Label1 = Section1:CreateLabel("Label 1")
-Label1:UpdateText("lol")
+-
 -------------
 local Button1 = Section1:CreateButton("Button 1", function()
-	print("Click Button 1")
+	
 end)
 Button1:AddToolTip("Button 1 ToolTip")
--------------
+--[[
 local Toggle1 = Section1:CreateToggle("Toggle 1", nil, function(State)
 	print(State)
 end)
@@ -89,6 +87,9 @@ local Colorpicker2 = Section2:CreateColorpicker("Colorpicker 2\nMultiline", func
 end)
 Colorpicker2:AddToolTip("Colorpicker 2 ToolTip")
 Colorpicker2:UpdateColor(Color3.fromRGB(0,0,255))
+
+local Label1 = Section1:CreateLabel("Label 1")
+Label1:UpdateText("lol")
 ]]
 local Toggle3 = Section3:CreateToggle("UI Toggle", nil, function(State)
 	Window:Toggle(State)
