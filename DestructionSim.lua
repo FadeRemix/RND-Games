@@ -11,7 +11,6 @@ local Tab1 = Window:CreateTab("Cheats")
 local Tab2 = Window:CreateTab("UI Settings")
 
 local Section1 = Tab1:CreateSection("First Section")
-local Section2 = Tab1:CreateSection("Second Section")
 local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
 --[[
