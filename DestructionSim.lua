@@ -14,7 +14,7 @@ local Section1 = Tab1:CreateSection("First Section")
 local Section2 = Tab1:CreateSection("Second Section")
 local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
-
+--[[
 local Label1 = Section1:CreateLabel("Label 1")
 Label1:UpdateText("lol")
 -------------
@@ -51,13 +51,13 @@ local Dropdown1 = Section1:CreateDropdown("Dropdown 1", {"Option 1","Option 2","
 end)
 Dropdown1:AddToolTip("Dropdown 1 ToolTip")
 Dropdown1:SetOption("Option 1")
--------------
+
 local Colorpicker1 = Section1:CreateColorpicker("Colorpicker 1", function(Color)
 	print(Color)
 end)
 Colorpicker1:AddToolTip("Colorpicker 1 ToolTip")
 Colorpicker1:UpdateColor(Color3.fromRGB(255,0,0))
--------------
+]]
 Section2:CreateLabel("Label 2\nMultiline")
 -------------
 local Button2 = Section2:CreateButton("Button 2\nMultiline", function()
