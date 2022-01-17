@@ -57,7 +57,7 @@ local Colorpicker1 = Section1:CreateColorpicker("Colorpicker 1", function(Color)
 end)
 Colorpicker1:AddToolTip("Colorpicker 1 ToolTip")
 Colorpicker1:UpdateColor(Color3.fromRGB(255,0,0))
-]]
+
 Section2:CreateLabel("Label 2\nMultiline")
 -------------
 local Button2 = Section2:CreateButton("Button 2\nMultiline", function()
@@ -103,7 +103,7 @@ local Colorpicker3 = Section3:CreateColorpicker("UI Color", function(Color)
 	Window:ChangeColor(Color)
 end)
 Colorpicker3:UpdateColor(Config.Color)
-
+]]
 -- credits to jan for patterns
 local Dropdown3 = Section4:CreateDropdown("Image", {"Default","Hearts","Abstract","Hexagon","Circles","Lace With Flowers","Floral"}, function(Name)
 	if Name == "Default" then
