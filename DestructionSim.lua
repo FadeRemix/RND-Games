@@ -13,10 +13,28 @@ local Tab2 = Window:CreateTab("UI Settings")
 local Section1 = Tab1:CreateSection("First Section")
 local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
--
 -------------
-local Button1 = Section1:CreateButton("Button 1", function()
-	
+local Button1 = Section1:CreateButton("Destroy Area", function()
+	local function owo(model)
+    a = model:GetChildren()
+    for i = 1, #a do
+        if a[i]:IsA("Part") then
+            p = a[i]
+            game:GetService("ReplicatedStorage").Remotes.sellBricks:FireServer()
+            local A_1 = os.time()--how about next time you get a "remote key" that can handle the neutron style
+            local A_2 = game.Players.LocalPlayer.Backpack.Bomb.Stats
+            local A_3 = p.Position
+            local Event = game:GetService("ReplicatedStorage").Remotes.explodeBomb
+            Event:FireServer(A_1, A_2, A_3)
+            game.RunService.Heartbeat:Wait()
+        end
+    end
+end
+for i, v in pairs(workspace.Areas[game.Players.LocalPlayer.CurrentArea.Value]:GetChildren()) do
+    if v:IsA("Model") then
+        owo(v)
+    end
+end
 end)
 Button1:AddToolTip("Button 1 ToolTip")
 --[[
@@ -137,4 +155,4 @@ Slider3:SetValue(0)
 local Slider4 = Section4:CreateSlider("Tile Scale",0,1,nil,false, function(Value)
 	Window:SetTileScale(Value)
 end)
-Slider4:SetValue(0.5)
+Slider4:SetValue(0.5
