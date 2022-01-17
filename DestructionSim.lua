@@ -89,7 +89,7 @@ local Colorpicker2 = Section2:CreateColorpicker("Colorpicker 2\nMultiline", func
 end)
 Colorpicker2:AddToolTip("Colorpicker 2 ToolTip")
 Colorpicker2:UpdateColor(Color3.fromRGB(0,0,255))
--------------
+]]
 local Toggle3 = Section3:CreateToggle("UI Toggle", nil, function(State)
 	Window:Toggle(State)
 end)
@@ -102,7 +102,7 @@ local Colorpicker3 = Section3:CreateColorpicker("UI Color", function(Color)
 	Window:ChangeColor(Color)
 end)
 Colorpicker3:UpdateColor(Config.Color)
-]]
+
 -- credits to jan for patterns
 local Dropdown3 = Section4:CreateDropdown("Image", {"Default","Hearts","Abstract","Hexagon","Circles","Lace With Flowers","Floral"}, function(Name)
 	if Name == "Default" then
