@@ -23,11 +23,14 @@ end
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/FadeRemix/UI-Librarys/main/LOADSTRINGS/BracketV3%20Loadstring"))()
 local Window = Library:CreateWindow(Config, game:GetService("CoreGui"))
 
+local plrname = game:GetService("Players").cameronf
+local LPR = game:GetService("Workspace").plrname
+
 local Tab1 = Window:CreateTab("Cheats")
 local Tab2 = Window:CreateTab("UI Settings")
 
 local Section1 = Tab1:CreateSection("Exploits")
-local Section2 = Tab2:CreateSection("Other")
+local Section2 = Tab1:CreateSection("Other")
 local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
 -------------
@@ -56,7 +59,9 @@ end)
 Button1:AddToolTip("MUST STAY IN AREA")
 -------------
 local Dropdown1 = Section2:CreateDropdown("Teleport to area", {"Racetrack","Construction","Farm"}, function(String)
-	print(String)
+	if String == "Racetrack" then
+		print(LPR)
+	end
 end)
 Dropdown1:AddToolTip("Teleport to any area")
 -------------
