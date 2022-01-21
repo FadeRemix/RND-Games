@@ -135,10 +135,12 @@ local Dropdown1 = Section2:CreateDropdown("Teleport to area", {"Switch","Rubix",
 end)
 Dropdown1:AddToolTip("Teleport to any area")
 -------------
+--[[
 local AUTOFARMbutton = Section5:CreateButton("Auto Farm", function()
 tptorooms()
 end)
 AUTOFARMbutton:AddToolTip("Must leave game to turn off... for now")
+]]
 -------------
 --[[
 local Toggle1 = Section1:CreateToggle("Toggle 1", nil, function(State)
