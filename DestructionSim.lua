@@ -23,14 +23,45 @@ end
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/FadeRemix/UI-Librarys/main/LOADSTRINGS/BracketV3%20Loadstring"))()
 local Window = Library:CreateWindow(Config, game:GetService("CoreGui"))
 
-local plrname = game:GetService("Players").cameronf
-local LPR = game:GetService("Workspace").plrname
+local speaker = game.Players.LocalPlayer 
+local plrname = game:GetService("Players").LocalPlayer.Name
+local LPR = game:GetService("Workspace"):FindFirstChild(plrname)
+local humnoid = game:GetService("Workspace"):FindFirstChild(plrname).HumanoidRootPart
+local places = {
+    {"Switch",37.0067978, 1.50002098, -1054.49866},
+    {"Rubix",-107.993179, 1.50002098, -1059.49866},
+    {"Emojis",37.0067978, 1.50002098, -754.498657},
+    {"Players",-107.993179, 1.50002098, -759.498657},
+    {"Racetrack",37.0067978, 1.50002098, -454.498627},
+    {"Construction",-107.993179, 1.50002098, -459.498688},
+    {"Farm",37.0067978, 1.50002098, -154.498627},
+    {"Roblox Town",-107.993202, 1.50002098, -159.498657},
+    {"Light House",37.0067978, 1.50002098, 145.501343},
+    {"Space",-107.993202, 1.50002098, 140.501358},
+    {"Prison",37.0067978, 1.50002098, 445.501373},
+    {"Pyramid",-107.993172, 1.50002098, 440.501312},
+    {"Castle",37.0067978, 1.50002098, 745.501343},
+    {"Glass Tower",-107.993202, 1.50002098, 740.501282},
+    {"Volcano",37.0067978, 1.50002098, 1095.50134},
+    {"Doomspire",-107.993202, 1.50002098, 1090.50122}
+}
+
+
+local function tptorooms()
+	for num,current in pairs(places) do
+		wait(7)
+  		humnoid.CFrame = CFrame.new(current[2],current[3],current[4])
+    	print("i made it")
+    end
+end
+
 
 local Tab1 = Window:CreateTab("Cheats")
 local Tab2 = Window:CreateTab("UI Settings")
 
 local Section1 = Tab1:CreateSection("Exploits")
 local Section2 = Tab1:CreateSection("Other")
+local Section5 = Tab1:CreateSection("Auto Farm")
 local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
 -------------
@@ -58,12 +89,47 @@ end
 end)
 Button1:AddToolTip("MUST STAY IN AREA")
 -------------
-local Dropdown1 = Section2:CreateDropdown("Teleport to area", {"Racetrack","Construction","Farm"}, function(String)
-	if String == "Racetrack" then
-		print(LPR)
+local NoclipToggle = Section2:CreateToggle("No-clip", nil, function(State)
+	local Noclipping = nil
+if State == true then
+		Clip = false
+	wait(0.1)
+	local function NoclipLoop()
+		if Clip == false and speaker.Character ~= nil then
+			for _, child in pairs(speaker.Character:GetDescendants()) do
+				if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
+					child.CanCollide = false
+				end
+			end
+		end
 	end
+	Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+	elseif State == false then
+			if Noclipping then
+		Noclipping:Disconnect()
+	end
+	Clip = true
+end
+end)
+NoclipToggle:AddToolTip("Allows you to walk in any room")
+NoclipToggle:CreateKeybind("E", function(Key)
+	print(Key)
+end)
+-------------
+local Dropdown1 = Section2:CreateDropdown("Teleport to area", {"Switch","Rubix","Emojis","Players","Racetrack","Construction","Roblox Town","Light House","Space","Prison","Pyramid","Castle","Glass Tower","Volcano","Doomspire"}, function(String)
+    local selection = String
+    for _,v in pairs(places) do
+        if selection == v[1] then
+            humnoid.CFrame = CFrame.new(v[2],v[3],v[4])
+        end
+    end
 end)
 Dropdown1:AddToolTip("Teleport to any area")
+-------------
+local AUTOFARMbutton = Section5:CreateButton("Auto Farm", function()
+tptorooms()
+end)
+Button1:AddToolTip("Must leave game to turn off... for now")
 -------------
 --[[
 local Toggle1 = Section1:CreateToggle("Toggle 1", nil, function(State)
