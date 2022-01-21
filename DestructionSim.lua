@@ -4,12 +4,11 @@ local Config = {
 	Keybind = Enum.KeyCode.RightBracket
 }
 
-		local function owo(model)
-	    a = model:GetChildren()
+local function owo(model)
+	a = model:GetChildren()
 	    for i = 1, #a do
 	        if a[i]:IsA("Part") then
 	            p = a[i]
-	            game:GetService("ReplicatedStorage").Remotes.sellBricks:FireServer()
 	            local A_1 = os.time()--how about next time you get a "remote key" that can handle the neutron style
 	            local A_2 = game.Players.LocalPlayer.Backpack.Bomb.Stats
 	            local A_3 = p.Position
@@ -17,8 +16,9 @@ local Config = {
 	            Event:FireServer(A_1, A_2, A_3)
 	            game.RunService.Heartbeat:Wait()
 	        end
-	    end
 	end
+end
+
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/FadeRemix/UI-Librarys/main/LOADSTRINGS/BracketV3%20Loadstring"))()
 local Window = Library:CreateWindow(Config, game:GetService("CoreGui"))
@@ -30,6 +30,21 @@ local Section1 = Tab1:CreateSection("First Section")
 local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
 -------------
+
+-------------
+local TogAUTOSELL = Section1:CreateToggle("Auto Sell", nil, function(State)
+	if State == true then
+		while wait(1) do
+		game:GetService("ReplicatedStorage").Remotes.sellBricks:FireServer()
+	end
+	elseif State == false then
+		print("toggle off")
+	end
+end)
+TogAUTOSELL:AddToolTip("Will automatically sell all")
+-------------
+
+-------------
 local Button1 = Section1:CreateButton("Destroy Area", function()
 for i, v in pairs(workspace.Areas[game.Players.LocalPlayer.CurrentArea.Value]:GetChildren()) do
 	    if v:IsA("Model") then
@@ -37,7 +52,7 @@ for i, v in pairs(workspace.Areas[game.Players.LocalPlayer.CurrentArea.Value]:Ge
 end
 end
 end)
-Button1:AddToolTip("Button 1 ToolTip")
+Button1:AddToolTip("Will destroy entire area")
 --[[
 local Toggle1 = Section1:CreateToggle("Toggle 1", nil, function(State)
 	print(State)
@@ -156,4 +171,4 @@ Slider3:SetValue(0)
 local Slider4 = Section4:CreateSlider("Tile Scale",0,1,nil,false, function(Value)
 	Window:SetTileScale(Value)
 end)
-Slider4:SetValue(0.5
+Slider4:SetValue(0.5)
