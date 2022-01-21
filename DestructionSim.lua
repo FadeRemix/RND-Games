@@ -46,12 +46,21 @@ local places = {
     {"Doomspire",-107.993202, 1.50002098, 1090.50122}
 }
 
+local function destoy()
+    for i, v in pairs(workspace.Areas[game.Players.LocalPlayer.CurrentArea.Value]:GetChildren()) do
+	    if v:IsA("Model") then
+	owo(v)
+        end
+    end
+end
+
 
 local function tptorooms()
 	for num,current in pairs(places) do
 		wait(7)
-  		humnoid.CFrame = CFrame.new(current[2],current[3],current[4])
-    	print("i made it")
+  		    humnoid.CFrame = CFrame.new(current[2],current[3],current[4])
+  		    wait(1)
+  		    destoy()
     end
 end
 
@@ -69,15 +78,15 @@ local Section4 = Tab2:CreateSection("Background")
 -------------
 local TogAUTOSELL = Section1:CreateToggle("Auto Sell", nil, function(State)
 	if State == true then
-		while wait(1) do
+		while wait(0.1) do
 		game:GetService("ReplicatedStorage").Remotes.sellBricks:FireServer()
 	end
 	elseif State == false then
 		print("toggle off")
-	end
-end)
-TogAUTOSELL:AddToolTip("Will automatically sell all")
--------------
+    	end
+    end)
+    TogAUTOSELL:AddToolTip("Will automatically sell all")
+    -------------
 
 -------------
 local Button1 = Section1:CreateButton("Destroy Area", function()
@@ -129,7 +138,7 @@ Dropdown1:AddToolTip("Teleport to any area")
 local AUTOFARMbutton = Section5:CreateButton("Auto Farm", function()
 tptorooms()
 end)
-Button1:AddToolTip("Must leave game to turn off... for now")
+AUTOFARMbutton:AddToolTip("Must leave game to turn off... for now")
 -------------
 --[[
 local Toggle1 = Section1:CreateToggle("Toggle 1", nil, function(State)
