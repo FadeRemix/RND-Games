@@ -26,7 +26,8 @@ local Window = Library:CreateWindow(Config, game:GetService("CoreGui"))
 local Tab1 = Window:CreateTab("Cheats")
 local Tab2 = Window:CreateTab("UI Settings")
 
-local Section1 = Tab1:CreateSection("First Section")
+local Section1 = Tab1:CreateSection("Exploits")
+local Section2 = Tab2:CreateSection("Other")
 local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
 -------------
@@ -52,7 +53,13 @@ for i, v in pairs(workspace.Areas[game.Players.LocalPlayer.CurrentArea.Value]:Ge
 end
 end
 end)
-Button1:AddToolTip("Will destroy entire area")
+Button1:AddToolTip("MUST STAY IN AREA")
+-------------
+local Dropdown1 = Section2:CreateDropdown("Teleport to area", {"Racetrack","Construction","Farm"}, function(String)
+	print(String)
+end)
+Dropdown1:AddToolTip("Teleport to any area")
+-------------
 --[[
 local Toggle1 = Section1:CreateToggle("Toggle 1", nil, function(State)
 	print(State)
