@@ -70,7 +70,6 @@ local Tab2 = Window:CreateTab("UI Settings")
 
 local Section1 = Tab1:CreateSection("Exploits")
 local Section2 = Tab1:CreateSection("Other")
-local Section5 = Tab1:CreateSection("Auto Farm")
 local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
 -------------
