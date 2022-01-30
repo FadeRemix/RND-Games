@@ -1,2 +1,2 @@
 # RND-Games
- For games that i feel like making scripts for :giggles:
+ NOT BEING WORKED ON --- MOVED TO GE
