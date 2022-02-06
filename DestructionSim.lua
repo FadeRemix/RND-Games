@@ -19,7 +19,6 @@ local function owo(model)
 	end
 end
 
-
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/FadeRemix/UI-Librarys/main/LOADSTRINGS/BracketV3%20Loadstring"))()
 local Window = Library:CreateWindow(Config, game:GetService("CoreGui"))
 
@@ -74,16 +73,12 @@ local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
 -------------
 
+local shouldfire = false
+
 -------------
 local TogAUTOSELL = Section1:CreateToggle("Auto Sell", nil, function(State)
-	if State == true then
-		while wait(0.1) do
-		game:GetService("ReplicatedStorage").Remotes.sellBricks:FireServer()
-	end
-	elseif State == false then
-		print("toggle off")
-    	end
-    end)
+	shouldfire = State
+end)
     TogAUTOSELL:AddToolTip("Will automatically sell all")
     -------------
 
@@ -226,6 +221,8 @@ local Colorpicker3 = Section3:CreateColorpicker("UI Color", function(Color)
 end)
 Colorpicker3:UpdateColor(Config.Color)
 
+local LabelCreator = Section3:CreateLabel("Created by: Fade#8495")
+
 -- credits to jan for patterns
 local Dropdown3 = Section4:CreateDropdown("Image", {"Default","Hearts","Abstract","Hexagon","Circles","Lace With Flowers","Floral"}, function(Name)
 	if Name == "Default" then
@@ -260,3 +257,12 @@ local Slider4 = Section4:CreateSlider("Tile Scale",0,1,nil,false, function(Value
 	Window:SetTileScale(Value)
 end)
 Slider4:SetValue(0.5)
+
+
+while wait(0.01) do
+	if shouldfire then
+		game:GetService("ReplicatedStorage").Remotes.sellBricks:FireServer()
+		print("go")
+	end 
+	print("damn..")
+end
