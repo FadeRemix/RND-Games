@@ -1,2 +1,2 @@
 # RND-Games
- NOT BEING WORKED ON --- MOVED TO GE
+These are random games that i am working on :)
