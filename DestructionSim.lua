@@ -111,7 +111,7 @@ Button1:AddToolTip("MUST STAY IN AREA")
 
 -------------
 
-local buttonINVIS = Section1:CreateButton("Make Player Invis",function()
+local buttonINVIS = Section1:CreateButton("Make Players Invis (SS)",function()
 	for i,v in next,game.Players:GetPlayers() do
 	    if v.Character then
 	        for i,v in next,v.Character:GetChildren() do
@@ -121,7 +121,7 @@ local buttonINVIS = Section1:CreateButton("Make Player Invis",function()
 	        end
 	    end
 	end
-end
+end)
 buttonINVIS:AddToolTip("!! SERVERSIDE !!")
 
 -------------
