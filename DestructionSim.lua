@@ -4,6 +4,7 @@ local Config = {
 	Keybind = Enum.KeyCode.RightBracket
 }
 
+
 local function owo(model)
 	a = model:GetChildren()
 	    for i = 1, #a do
@@ -53,22 +54,32 @@ local function destoy()
     end
 end
 
-
+--[[
 local function tptorooms()
 	for num,current in pairs(places) do
 		wait(7)
   		    humnoid.CFrame = CFrame.new(current[2],current[3],current[4])
   		    wait(1)
-  		    destoy()
+  		destoy()
     end
 end
+]]
 
+local function cooldwn(CoolDownVAL)
+	for h,q in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+		require(q.Stats).Cooldown = CoolDownVAL
+	end
+end
 
 local Tab1 = Window:CreateTab("Cheats")
+local modTab = Window:CreateTab("Gun Mods")
 local Tab2 = Window:CreateTab("UI Settings")
 
 local Section1 = Tab1:CreateSection("Exploits")
 local Section2 = Tab1:CreateSection("Other")
+local sectionboost = Tab1:CreateSection("Boosts")
+local gunmods = modTab:CreateSection("Launcher Mods")
+local unimods = modTab:CreateSection("Universal Mods")
 local Section3 = Tab2:CreateSection("Menu")
 local Section4 = Tab2:CreateSection("Background")
 -------------
@@ -79,19 +90,40 @@ local shouldfire = false
 local TogAUTOSELL = Section1:CreateToggle("Auto Sell", nil, function(State)
 	shouldfire = State
 end)
-    TogAUTOSELL:AddToolTip("Will automatically sell all")
-    -------------
+TogAUTOSELL:AddToolTip("Will automatically sell all")
 
 -------------
 local Button1 = Section1:CreateButton("Destroy Area", function()
 for i, v in pairs(workspace.Areas[game.Players.LocalPlayer.CurrentArea.Value]:GetChildren()) do
 	    if v:IsA("Model") then
-	owo(v)
-end
-end
+			owo(v)
+		end
+	end
 end)
 Button1:AddToolTip("MUST STAY IN AREA")
 -------------
+
+local TextBox1 = sectionboost:CreateTextBox("XP Boost", "Multiplier Ammout", true, function(Value)
+	game:GetService("ReplicatedStorage").Remotes.generateBoost:FireServer("XPBoost", 99999999999999, Value)
+end)
+TextBox1:AddToolTip("Will multiply ammout of XP you get")
+
+-------------
+
+local MoneyBox = sectionboost:CreateTextBox("Money Boost", "Multiplier Ammout", true, function(Value)
+	game:GetService("ReplicatedStorage").Remotes.generateBoost:FireServer("CoinBoost", 99999999999999, Value)
+end)
+MoneyBox:AddToolTip("Will multiply ammout of money you get")
+
+-------------
+
+local brickBox = sectionboost:CreateTextBox("Brick Boost", "Multiplier Ammout", true, function(Value)
+	game:GetService("ReplicatedStorage").Remotes.generateBoost:FireServer("BrickBoost", 99999999999999, Value)
+end)
+brickBox:AddToolTip("Will multiply ammout of bricks you get")
+
+-------------
+
 local NoclipToggle = Section2:CreateToggle("No-clip", nil, function(State)
 	local Noclipping = nil
 if State == true then
@@ -118,7 +150,24 @@ NoclipToggle:AddToolTip("Allows you to walk in any room")
 NoclipToggle:CreateKeybind("E", function(Key)
 	print(Key)
 end)
+
 -------------
+
+local anchortoggle = Section2:CreateToggle("Anchor Character", nil, function(State)
+if State == true then
+	humnoid.Anchored = true
+	elseif State == false then
+		humnoid.Anchored = false
+	end
+end)
+anchortoggle:AddToolTip("Useful for 'Destroy Area'")
+anchortoggle:CreateKeybind("L", function(Key)
+	print(Key)
+end)
+
+
+-------------
+
 local Dropdown1 = Section2:CreateDropdown("Teleport to area", {"Switch","Rubix","Emojis","Players","Racetrack","Construction","Roblox Town","Light House","Space","Prison","Pyramid","Castle","Glass Tower","Volcano","Doomspire"}, function(String)
     local selection = String
     for _,v in pairs(places) do
@@ -128,14 +177,151 @@ local Dropdown1 = Section2:CreateDropdown("Teleport to area", {"Switch","Rubix",
     end
 end)
 Dropdown1:AddToolTip("Teleport to any area")
+
 -------------
+
+local rockspedslider = gunmods:CreateSlider("Rocket Speed",0,100,2,true, function(Value)
+rockspedsliderval = Value
+end)
+rockspedslider:AddToolTip("How fast the rocket will go")
+
+-------------
+
+local burstslider = gunmods:CreateSlider("Bursts",0,100,1,true, function(Value)
+burstsliderval = Value
+end)
+burstslider:AddToolTip("Will burst rocket shots")
+
+-------------
+
+local burstspedslider = gunmods:CreateSlider("Burst Speed",0,1,0.5,false, function(Value)
+burstspedsliderval = Value
+end)
+burstspedslider:AddToolTip("How fast the burst will go")
+
+-------------
+
+local coolApply = gunmods:CreateButton("Apply Gun Mods", function()
+for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	require(v.Stats).RocketSpeed = rockspedsliderval
+	require(v.Stats).Bursts = burstsliderval
+	require(v.Stats).BurstWait = burstspedsliderval
+    end
+end)
+coolApply:AddToolTip("Dont hold Launcher!")
+
+------------
+
+local coolslider = unimods:CreateSlider("Cooldown",0,100,5,true, function(Value)
+cooldwnslderval = Value
+end)
+coolslider:AddToolTip("Set how fast you can shoot")
+
+------------
+
+local blastRslider = unimods:CreateSlider("Blast Radius",0,100,3,true, function(Value)
+blastRsliderval = Value
+end)
+blastRslider:AddToolTip("How big the explosion is")
+
+-------------
+
+local blastFslider = unimods:CreateSlider("Blast Force",100,1000,500,true, function(Value)
+blastFsliderval = Value
+end)
+blastFslider:AddToolTip("How strong the explosion is")
+
+-------------
+
+local modapply = unimods:CreateButton("Apply Universal Mods", function()
+for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	require(v.Stats).Cooldown = cooldwnslderval
+	require(v.Stats).BlastRadius = blastRsliderval
+	require(v.Stats).BlastForce = blastFsliderval
+    end
+end)
+modapply:AddToolTip("Dont hold Launcher/Grenade!")
+
+------------
+
+local Slider3 = Section4:CreateSlider("Transparency",0,1,nil,false, function(Value)
+	--code
+end)
+
+local resetval = Section4:CreateButton("reset Transparency",function(Value)
+	Slider3:SetValue(0)
+end)
+
+------------
+local Toggle3 = Section3:CreateToggle("UI Toggle", nil, function(State)
+	Window:Toggle(State)
+end)
+Toggle3:CreateKeybind(tostring(Config.Keybind):gsub("Enum.KeyCode.", ""), function(Key)
+	Config.Keybind = Enum.KeyCode[Key]
+end)
+Toggle3:SetState(true)
+
+local Colorpicker3 = Section3:CreateColorpicker("UI Color", function(Color)
+	Window:ChangeColor(Color)
+end)
+Colorpicker3:UpdateColor(Config.Color)
+
+local LabelCreator = Section3:CreateLabel("Created by: Fade#8495")
+local LabelMenu = Section3:CreateLabel("UI Lib: Bracket V3")
+
+-- credits to jan for patterns
+local Dropdown3 = Section4:CreateDropdown("Image", {"Default","Hearts","Abstract","Hexagon","Circles","Lace With Flowers","Floral"}, function(Name)
+	if Name == "Default" then
+		Window:SetBackground("2151741365")
+	elseif Name == "Hearts" then
+		Window:SetBackground("6073763717")
+	elseif Name == "Abstract" then
+		Window:SetBackground("6073743871")
+	elseif Name == "Hexagon" then
+		Window:SetBackground("6073628839")
+	elseif Name == "Circles" then
+		Window:SetBackground("6071579801")
+	elseif Name == "Lace With Flowers" then
+		Window:SetBackground("6071575925")
+	elseif Name == "Floral" then
+		Window:SetBackground("5553946656")
+	end
+end)
+Dropdown3:SetOption("Default")
+
+local Colorpicker4 = Section4:CreateColorpicker("Color", function(Color)
+	Window:SetBackgroundColor(Color)
+end)
+Colorpicker4:UpdateColor(Color3.new(1,1,1))
+
+local Slider3 = Section4:CreateSlider("Transparency",0,1,nil,false, function(Value)
+	Window:SetBackgroundTransparency(Value)
+end)
+Slider3:SetValue(0)
+
+local Slider4 = Section4:CreateSlider("Tile Scale",0,1,nil,false, function(Value)
+	Window:SetTileScale(Value)
+end)
+Slider4:SetValue(0.5)
+
+
+while wait(0.01) do
+	if shouldfire then
+		game:GetService("ReplicatedStorage").Remotes.sellBricks:FireServer()
+		print("on")
+	end 
+end
+
+------------- Auto farm ish
+
 --[[
 local AUTOFARMbutton = Section5:CreateButton("Auto Farm", function()
 tptorooms()
 end)
 AUTOFARMbutton:AddToolTip("Must leave game to turn off... for now")
 ]]
--------------
+
+------------- Menu shit
 --[[
 local Toggle1 = Section1:CreateToggle("Toggle 1", nil, function(State)
 	print(State)
@@ -208,61 +394,3 @@ Colorpicker2:UpdateColor(Color3.fromRGB(0,0,255))
 local Label1 = Section1:CreateLabel("Label 1")
 Label1:UpdateText("lol")
 ]]
-local Toggle3 = Section3:CreateToggle("UI Toggle", nil, function(State)
-	Window:Toggle(State)
-end)
-Toggle3:CreateKeybind(tostring(Config.Keybind):gsub("Enum.KeyCode.", ""), function(Key)
-	Config.Keybind = Enum.KeyCode[Key]
-end)
-Toggle3:SetState(true)
-
-local Colorpicker3 = Section3:CreateColorpicker("UI Color", function(Color)
-	Window:ChangeColor(Color)
-end)
-Colorpicker3:UpdateColor(Config.Color)
-
-local LabelCreator = Section3:CreateLabel("Created by: Fade#8495")
-
--- credits to jan for patterns
-local Dropdown3 = Section4:CreateDropdown("Image", {"Default","Hearts","Abstract","Hexagon","Circles","Lace With Flowers","Floral"}, function(Name)
-	if Name == "Default" then
-		Window:SetBackground("2151741365")
-	elseif Name == "Hearts" then
-		Window:SetBackground("6073763717")
-	elseif Name == "Abstract" then
-		Window:SetBackground("6073743871")
-	elseif Name == "Hexagon" then
-		Window:SetBackground("6073628839")
-	elseif Name == "Circles" then
-		Window:SetBackground("6071579801")
-	elseif Name == "Lace With Flowers" then
-		Window:SetBackground("6071575925")
-	elseif Name == "Floral" then
-		Window:SetBackground("5553946656")
-	end
-end)
-Dropdown3:SetOption("Default")
-
-local Colorpicker4 = Section4:CreateColorpicker("Color", function(Color)
-	Window:SetBackgroundColor(Color)
-end)
-Colorpicker4:UpdateColor(Color3.new(1,1,1))
-
-local Slider3 = Section4:CreateSlider("Transparency",0,1,nil,false, function(Value)
-	Window:SetBackgroundTransparency(Value)
-end)
-Slider3:SetValue(0)
-
-local Slider4 = Section4:CreateSlider("Tile Scale",0,1,nil,false, function(Value)
-	Window:SetTileScale(Value)
-end)
-Slider4:SetValue(0.5)
-
-
-while wait(0.01) do
-	if shouldfire then
-		game:GetService("ReplicatedStorage").Remotes.sellBricks:FireServer()
-		print("go")
-	end 
-	print("damn..")
-end
