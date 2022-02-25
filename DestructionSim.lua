@@ -1,6 +1,6 @@
 local Config = {
     WindowName = "Destruction Simulator",
-	Color = Color3.fromRGB(255,128,64),
+	Color = Color3.fromRGB(0,50,111),
 	Keybind = Enum.KeyCode.RightBracket
 }
 
