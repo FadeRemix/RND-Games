@@ -27,6 +27,8 @@ local speaker = game.Players.LocalPlayer
 local plrname = game:GetService("Players").LocalPlayer.Name
 local LPR = game:GetService("Workspace"):FindFirstChild(plrname)
 local humnoid = game:GetService("Workspace"):FindFirstChild(plrname).HumanoidRootPart
+local bomb = game:GetService("ReplicatedStorage").Bombs.Bombs["Black Hole Bomb"].Tool
+local bombRemote = game:GetService("ReplicatedStorage").Remotes.clientServerBomb
 local places = {
     {"Switch",37.0067978, 1.50002098, -1054.49866},
     {"Rubix",-107.993179, 1.50002098, -1059.49866},
@@ -52,6 +54,11 @@ local function destoy()
 	owo(v)
         end
     end
+end
+
+local function makeInvis(part)
+    pcall(function()getrenv()._G.DropBomb(os.time(),bomb,game.Players.LocalPlayer,part,nil,part.Position)end)
+    game:GetService("ReplicatedStorage").Remotes.clientServerBomb:FireServer(os.time(),bomb,game.Players.LocalPlayer,part,nil,part.Position)
 end
 
 --[[
@@ -101,6 +108,22 @@ for i, v in pairs(workspace.Areas[game.Players.LocalPlayer.CurrentArea.Value]:Ge
 	end
 end)
 Button1:AddToolTip("MUST STAY IN AREA")
+
+-------------
+
+local buttonINVIS = Section1:CreateButton("Make Player Invis",function()
+	for i,v in next,game.Players:GetPlayers() do
+	    if v.Character then
+	        for i,v in next,v.Character:GetChildren() do
+	            if v:IsA("BasePart") then
+	                makeInvis(v)
+	            end
+	        end
+	    end
+	end
+end
+buttonINVIS:AddToolTip("!! SERVERSIDE !!")
+
 -------------
 
 local TextBox1 = sectionboost:CreateTextBox("XP Boost", "Multiplier Ammout", true, function(Value)
