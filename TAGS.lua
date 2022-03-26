@@ -4,7 +4,7 @@ local gun
 
 
 function gunCheck(tool)
-    if tool:FindFirstChild("Setting") then
+    if tool:FindFirstChild("GunScript_Local") then
         gun = tool
     end
 end
@@ -60,9 +60,8 @@ function inflict(player)
     game:GetService("ReplicatedStorage").Remotes.InflictTarget:InvokeServer(gun, game:GetService("Players").LocalPlayer, player.Character.Humanoid, player.Character.HumanoidRootPart, 300, ohTable6, ohTable7, player.Character.Head, ohTable9)
 end
 
-while wait(.5) do
+while wait(1) do
     for _,v in pairs(Players:GetPlayers()) do
         inflict(v)
     end
 end
-
