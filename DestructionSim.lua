@@ -126,24 +126,24 @@ buttonINVIS:AddToolTip("!! SERVERSIDE !!")
 
 -------------
 
-local TextBox1 = sectionboost:CreateTextBox("XP Boost", "Multiplier Ammout", true, function(Value)
+local TextBox1 = sectionboost:CreateTextBox("XP Boost", "Multiplier Amount", true, function(Value)
 	game:GetService("ReplicatedStorage").Remotes.generateBoost:FireServer("XPBoost", 99999999999999, Value)
 end)
-TextBox1:AddToolTip("Will multiply ammout of XP you get")
+TextBox1:AddToolTip("Will multiply amount of XP you get")
 
 -------------
 
-local MoneyBox = sectionboost:CreateTextBox("Money Boost", "Multiplier Ammout", true, function(Value)
+local MoneyBox = sectionboost:CreateTextBox("Money Boost", "Multiplier Amount", true, function(Value)
 	game:GetService("ReplicatedStorage").Remotes.generateBoost:FireServer("CoinBoost", 99999999999999, Value)
 end)
-MoneyBox:AddToolTip("Will multiply ammout of money you get")
+MoneyBox:AddToolTip("Will multiply amount of money you get")
 
 -------------
 
-local brickBox = sectionboost:CreateTextBox("Brick Boost", "Multiplier Ammout", true, function(Value)
+local brickBox = sectionboost:CreateTextBox("Brick Boost", "Multiplier Amount", true, function(Value)
 	game:GetService("ReplicatedStorage").Remotes.generateBoost:FireServer("BrickBoost", 99999999999999, Value)
 end)
-brickBox:AddToolTip("Will multiply ammout of bricks you get")
+brickBox:AddToolTip("Will multiply amount of bricks you get")
 
 -------------
 
@@ -271,7 +271,7 @@ local Slider3 = Section4:CreateSlider("Transparency",0,1,nil,false, function(Val
 	--code
 end)
 
-local resetval = Section4:CreateButton("reset Transparency",function(Value)
+local resetval = Section4:CreateButton("Reset Transparency",function(Value)
 	Slider3:SetValue(0)
 end)
 
